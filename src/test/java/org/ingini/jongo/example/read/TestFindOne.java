@@ -1,25 +1,24 @@
+package org.ingini.jongo.example.read;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import org.bson.LazyDBList;
 import org.bson.types.ObjectId;
 import org.ingini.jongo.example.model.heroes.Gender;
 import org.ingini.jongo.example.model.heroes.Hero;
 import org.ingini.jongo.example.model.heroes.Heroine;
 import org.ingini.jongo.example.model.heroes.Human;
-import org.ingini.monogo.testbed.MongoManager;
-import org.ingini.monogo.testbed.annotation.MongoTestBedCollection;
+import org.ingini.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.jongo.ResultHandler;
 import org.junit.BeforeClass;
-import org.junit.ClassRule;
 import org.junit.Test;
 
-import javax.inject.Inject;
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -42,22 +41,16 @@ public class TestFindOne {
 
     public static final String HEROES = "heroes";
 
-    @ClassRule
-    public static MongoManager mongoManager = MongoManager.mongoConnect("mongodb://127.0.0.1:27017");
-
-    @MongoTestBedCollection(name = HEROES, location = "heroes.json")
-    public static DBCollection collection;
-
-    @Inject
-    public static Mongo mongo;
-
-    @Inject
     public static DB mongoDB;
 
     public static MongoCollection heroes;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws UnknownHostException {
+        mongoDB = new MongoClient("127.0.0.1", 27017).getDB("game_of_thrones");
+
+        CollectionManager.cleanAndFill(mongoDB, "heroes.json", HEROES);
+
         Jongo jongo = new Jongo(mongoDB);
         heroes = jongo.getCollection(HEROES);
     }

@@ -1,20 +1,18 @@
+package org.ingini.jongo.example.create;
+
 import com.google.common.collect.Sets;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
 import org.fest.assertions.Assertions;
 import org.ingini.jongo.example.model.heroes.*;
 import org.ingini.jongo.example.model.weapons.Sword;
-import org.ingini.monogo.testbed.MongoManager;
-import org.ingini.monogo.testbed.annotation.MongoTestBedCollection;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
-import org.junit.ClassRule;
 import org.junit.Test;
 
-import javax.inject.Inject;
+import java.net.UnknownHostException;
 import java.util.Set;
 
 /**
@@ -37,23 +35,15 @@ public class TestInsertion {
     public static final String HEROES = "heroes";
     public static final String WEAPONS = "weapons";
 
-    @ClassRule
-    public static MongoManager mongoManager = MongoManager.mongoConnect("mongodb://127.0.0.1:27017");
-
-    @MongoTestBedCollection(name = HEROES, location = "heroes.json")
-    public static DBCollection collection;
-
-    @Inject
-    public static Mongo mongo;
-
-    @Inject
     public static DB mongoDB;
 
     public static MongoCollection heroes;
     public static MongoCollection weapons;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws UnknownHostException {
+        mongoDB = new MongoClient("127.0.0.1", 27017).getDB("game_of_thrones");
+
         Jongo jongo = new Jongo(mongoDB);
         heroes = jongo.getCollection(HEROES);
         weapons = jongo.getCollection(WEAPONS);

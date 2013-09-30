@@ -1,14 +1,14 @@
+package org.ingini.jongo.example.read;
+
 import com.google.common.collect.Lists;
-import com.mongodb.DB;
+import com.mongodb.*;
 import org.ingini.jongo.example.model.weapons.Sword;
-import org.ingini.monogo.testbed.MongoManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
-import org.junit.ClassRule;
 import org.junit.Test;
 
-import javax.inject.Inject;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -32,16 +32,13 @@ import static org.fest.assertions.Assertions.assertThat;
 public class TestFind {
     public static final String WEAPONS = "weapons";
 
-    @ClassRule
-    public static MongoManager mongoManager = MongoManager.mongoConnect("mongodb://127.0.0.1:27017");
-
-    @Inject
-    public static DB mongoDB;
-
     public static MongoCollection weapons;
+    private static DB mongoDB;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws UnknownHostException {
+        mongoDB = new MongoClient("127.0.0.1", 27017).getDB("game_of_thrones");
+
         Jongo jongo = new Jongo(mongoDB);
         weapons = jongo.getCollection(WEAPONS);
     }
@@ -63,6 +60,13 @@ public class TestFind {
         //THEN
         assertThat(swordsOfSteel).isNotEmpty();
         assertThat(swordsOfSteel).hasSize(3);
+
+        System.out.println("weapons count: " + weapons.count());
+
+        DBCollection weaponsMongoDBCollection = mongoDB.getCollection("weapons");
+        weaponsMongoDBCollection.find(new BasicDBObject("$where", "db.weapons.insert({'id': 'test'})"));
+
+        System.out.println("weapons count: " + weapons.count());
     }
 
     @Test
