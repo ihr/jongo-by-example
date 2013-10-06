@@ -40,6 +40,7 @@ public class TestUpdate {
 
     public static final String WEAPONS = "weapons";
     public static final String HEROES = "heroes";
+    public static final String DB_NAME = "jongo_by_example";
 
     public static DB mongoDB;
 
@@ -49,7 +50,7 @@ public class TestUpdate {
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
-        mongoDB = new MongoClient("127.0.0.1", 27017).getDB("game_of_thrones");
+        mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         Jongo jongo = new Jongo(mongoDB);
         weapons = jongo.getCollection(WEAPONS);

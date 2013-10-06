@@ -69,7 +69,8 @@ public class CollectionManager {
         @Override
         public Object objectDone() {
             BSONObject b = (BSONObject) super.objectDone();
-            if (b.containsField(MONGO_ID_KEY) && b.get(MONGO_ID_KEY) instanceof String) {
+            if (b.containsField(MONGO_ID_KEY) && b.get(MONGO_ID_KEY) instanceof String
+                    && ObjectId.isValid(String.valueOf(b.get(MONGO_ID_KEY)))) {
                 b.put(MONGO_ID_KEY, new ObjectId(b.get(MONGO_ID_KEY).toString()));
             }
             return b;

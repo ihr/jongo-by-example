@@ -31,6 +31,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class TestDelete {
 
     public static final String WEAPONS = "weapons";
+    public static final String DB_NAME = "jongo_by_example";
 
     public static DB mongoDB;
 
@@ -38,7 +39,7 @@ public class TestDelete {
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
-        mongoDB = new MongoClient("127.0.0.1", 27017).getDB("game_of_thrones");
+        mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         Jongo jongo = new Jongo(mongoDB);
         weapons = jongo.getCollection(WEAPONS);
