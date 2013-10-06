@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.ingini.jongo.example.create.TestInsertion
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.678 sec

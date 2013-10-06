@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>jongo-by-example</groupId>
+    <groupId>org.ingini.mongodb</groupId>
     <artifactId>jongo-by-example</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -15,6 +15,7 @@
         <mongodb-driver.version>2.11.3</mongodb-driver.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <guava.version>15.0</guava.version>
+        <jsr305.version>2.0.1</jsr305.version>
         <fest-assert.version>1.4</fest-assert.version>
         <junit.version>4.10</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -47,6 +48,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>${jsr305.version}</version>
         </dependency>
 
         <dependency>
