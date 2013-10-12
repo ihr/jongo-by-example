@@ -1,4 +1,10 @@
-package org.ingini.mongodb.jongo.example.model.heroes;
+package org.ingini.mongodb.jongo.example.domain.beasts;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -15,6 +21,12 @@ package org.ingini.mongodb.jongo.example.model.heroes;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public enum Region {
-    WESTEROS, ESSOS, DORNE, IRON_ISLANDS, THE_CROWNLANDS, THE_RIVERLANDS, THE_VALE_OF_ARRYN, THE_NORTH, THE_REACH
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Immutable
+public class DireWolf extends Beast {
+
+    @JsonCreator
+    public DireWolf(@JsonProperty(NAME) String name) {
+        super(name);
+    }
 }

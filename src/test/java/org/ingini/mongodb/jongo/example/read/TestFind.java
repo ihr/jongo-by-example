@@ -3,7 +3,7 @@ package org.ingini.mongodb.jongo.example.read;
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
-import org.ingini.mongodb.jongo.example.model.weapons.Weapon;
+import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;

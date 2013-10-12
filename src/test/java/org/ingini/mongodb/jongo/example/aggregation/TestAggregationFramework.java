@@ -2,8 +2,8 @@ package org.ingini.mongodb.jongo.example.aggregation;
 
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
-import org.ingini.mongodb.jongo.example.model.aggregation.NameData;
-import org.ingini.mongodb.jongo.example.model.aggregation.StateData;
+import org.ingini.mongodb.jongo.example.domain.aggregation.NameData;
+import org.ingini.mongodb.jongo.example.domain.aggregation.StateData;
 import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;

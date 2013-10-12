@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.model.aggregation;
+package org.ingini.mongodb.jongo.example.domain.aggregation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;

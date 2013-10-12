@@ -1,10 +1,5 @@
-package org.ingini.mongodb.jongo.example.model.beasts;
+package org.ingini.mongodb.jongo.example.domain.heroes;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.annotation.concurrent.Immutable;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -21,12 +16,15 @@ import javax.annotation.concurrent.Immutable;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Immutable
-public class Dragon extends Beast {
+public enum Gender {
+    MALE(Constants.MALE_VALUE), FEMALE(Constants.FEMALE_VALUE);
 
-    @JsonCreator
-    protected Dragon(@JsonProperty(NAME) String name) {
-        super(name);
+    Gender(String genderString) {
+    }
+
+
+    public static class Constants {
+        public static final String MALE_VALUE = "MALE";
+        public static final String FEMALE_VALUE = "FEMALE";
     }
 }

@@ -1,15 +1,14 @@
-package org.ingini.mongodb.jongo.example.model.heroes;
+package org.ingini.mongodb.jongo.example.domain.heroes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
-import org.ingini.mongodb.jongo.example.model.beasts.Beast;
+import org.ingini.mongodb.jongo.example.domain.beasts.Beast;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Set;
 
-import static org.ingini.mongodb.jongo.example.model.heroes.Gender.FEMALE;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -36,7 +35,7 @@ public class Heroine extends Human {
                    @JsonProperty(ADDRESS) Address address,
                    @JsonProperty(CHILDREN) Set<? extends Human> children,
                    @JsonProperty(BEASTS) Set<? extends Beast> beasts) {
-        super(firstName, lastName, FEMALE, address, children, beasts);
+        super(firstName, lastName, Gender.FEMALE, address, children, beasts);
     }
 
     public static Heroine createHeroineWithoutChildrenAndNoBeasts(String firstName, String lastName,

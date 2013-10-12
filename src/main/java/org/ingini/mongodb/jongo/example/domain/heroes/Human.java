@@ -1,11 +1,11 @@
-package org.ingini.mongodb.jongo.example.model.heroes;
+package org.ingini.mongodb.jongo.example.domain.heroes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.ingini.mongodb.jongo.example.model.beasts.Beast;
+import org.ingini.mongodb.jongo.example.domain.beasts.Beast;
 import org.jongo.marshall.jackson.oid.ObjectId;
 
 import javax.annotation.concurrent.Immutable;

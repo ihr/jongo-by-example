@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.model.heroes;
+package org.ingini.mongodb.jongo.example.domain.heroes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

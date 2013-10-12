@@ -39,7 +39,7 @@
                 },
                 "beasts": [
                     {
-                        "_class": "org.ingini.mongodb.jongo.example.model.beasts.DireWolf",
+                        "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Lady"
                     }
                 ],
@@ -56,7 +56,7 @@
                 },
                 "beasts": [
                     {
-                        "_class": "org.ingini.mongodb.jongo.example.model.beasts.DireWolf",
+                        "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Nymeria"
                     }
                 ],
@@ -73,7 +73,7 @@
                 },
                 "beasts": [
                     {
-                        "_class": "org.ingini.mongodb.jongo.example.model.beasts.DireWolf",
+                        "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Grey Wind"
                     }
                 ],
@@ -90,7 +90,7 @@
                 },
                 "beasts": [
                     {
-                        "_class": "org.ingini.mongodb.jongo.example.model.beasts.DireWolf",
+                        "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Ghost"
                     }
                 ],
@@ -107,7 +107,7 @@
                 },
                 "beasts": [
                     {
-                        "_class": "org.ingini.mongodb.jongo.example.model.beasts.DireWolf",
+                        "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Summer"
                     }
                 ],
@@ -124,7 +124,7 @@
                 },
                 "beasts": [
                     {
-                        "_class": "org.ingini.mongodb.jongo.example.model.beasts.DireWolf",
+                        "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Shaggydog"
                     }
                 ],

@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.model.beasts;
+package org.ingini.mongodb.jongo.example.domain.beasts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
