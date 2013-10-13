@@ -30,7 +30,7 @@ import static org.fest.assertions.Assertions.assertThat;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class TestFind {
+public class TestFindWithRegex {
     public static final String WEAPONS = "weapons";
     public static final String DB_NAME = "db_for_jongo";
 

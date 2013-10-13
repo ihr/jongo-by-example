@@ -6,10 +6,8 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import org.bson.LazyDBList;
 import org.bson.types.ObjectId;
-import org.ingini.mongodb.jongo.example.domain.characters.Gender;
 import org.ingini.mongodb.jongo.example.domain.characters.Hero;
 import org.ingini.mongodb.jongo.example.domain.characters.Heroine;
-import org.ingini.mongodb.jongo.example.domain.characters.HumanCharacter;
 import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -21,6 +19,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.ingini.mongodb.jongo.example.domain.characters.Gender.FEMALE;
+import static org.ingini.mongodb.jongo.example.domain.characters.HumanCharacter.*;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -86,7 +86,7 @@ public class TestFindOne {
         //GIVEN
 
         //WHEN
-        Heroine heroine = characters.findOne("{" + HumanCharacter.GENDER + ": #, " + HumanCharacter.FIRST_NAME + ": #}", Gender.FEMALE, "Arya")//
+        Heroine heroine = characters.findOne("{" + GENDER + ": #, " + FIRST_NAME + ": #}", FEMALE, "Arya")//
                 .as(Heroine.class);
 
         //THEN
@@ -99,21 +99,22 @@ public class TestFindOne {
         //GIVEN
 
         //WHEN
-        Heroine heroine = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").projection("{children: {$elemMatch: {" + HumanCharacter.FIRST_NAME + ": #, " + //
-                HumanCharacter.LAST_NAME + ": #}}}", "Sansa", "Stark").map(new ResultHandler<Heroine>() {
-            @Override
-            public Heroine map(DBObject result) {
-                LazyDBList o = (LazyDBList) result.get(HumanCharacter.CHILDREN);
-                DBObject basicDbObject = (DBObject) o.get(0);
-                ObjectMapper objectMapper = new ObjectMapper();
-                String content = basicDbObject.toString();
-                try {
-                    return objectMapper.readValue(content, Heroine.class);
-                } catch (IOException e) {
-                    throw new IllegalStateException("Unable to deserialize " + content);
-                }
-            }
-        });
+        Heroine heroine = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f")
+                .projection("{children: {$elemMatch: {" + FIRST_NAME + ": #, " + LAST_NAME + ": #}}}", "Sansa", "Stark")
+                .map(new ResultHandler<Heroine>() {
+                    @Override
+                    public Heroine map(DBObject result) {
+                        LazyDBList o = (LazyDBList) result.get(CHILDREN);
+                        DBObject basicDbObject = (DBObject) o.get(0);
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        String content = basicDbObject.toString();
+                        try {
+                            return objectMapper.readValue(content, Heroine.class);
+                        } catch (IOException e) {
+                            throw new IllegalStateException("Unable to deserialize " + content);
+                        }
+                    }
+                });
 
         //THEN
         assertThat(heroine).isNotNull();
