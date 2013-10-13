@@ -1,10 +1,5 @@
 [
     {
-        "_id": "5186a0da44aee3f5e7e29956",
-        "gender": "FEMALE"
-    },
-
-    {
         "_id": "5186a8a221622e48542ea6b0",
         "gender": "FEMALE",
         "first_name": "Arya",
@@ -15,6 +10,87 @@
             "region": "THE_NORTH"
         },
         "gender": "FEMALE"
+    },
+
+    {
+        "gender": "MALE",
+        "_id": "5259a7fd3004e5974542c5e9",
+        "first_name": "Eddard",
+        "last_name": "Stark",
+        "address": {
+            "castle": "Winterfell",
+            "continent": "Westeros",
+            "region": "THE_NORTH"
+        },
+        "children": [
+            {
+                "gender": "MALE",
+                "first_name": "Jon",
+                "last_name": "Snow",
+                "address": {
+                    "castle": "Winterfell",
+                    "continent": "Westeros",
+                    "region": "THE_NORTH"
+                },
+                "gender": "MALE"
+            },
+            {
+                "gender": "MALE",
+                "first_name": "Rickon",
+                "last_name": "Stark",
+                "address": {
+                    "castle": "Winterfell",
+                    "continent": "Westeros",
+                    "region": "THE_NORTH"
+                },
+                "gender": "MALE"
+            },
+            {
+                "gender": "FEMALE",
+                "first_name": "Sansa",
+                "last_name": "Stark",
+                "address": {
+                    "castle": "Winterfell",
+                    "continent": "Westeros",
+                    "region": "THE_NORTH"
+                },
+                "gender": "FEMALE"
+            },
+            {
+                "gender": "FEMALE",
+                "first_name": "Arya",
+                "last_name": "Stark",
+                "address": {
+                    "castle": "Winterfell",
+                    "continent": "Westeros",
+                    "region": "THE_NORTH"
+                },
+                "gender": "FEMALE"
+            },
+            {
+                "gender": "MALE",
+                "first_name": "Robb",
+                "last_name": "Stark",
+                "address": {
+                    "castle": "Winterfell",
+                    "continent": "Westeros",
+                    "region": "THE_NORTH"
+                },
+                "gender": "MALE"
+            },
+            {
+                "gender": "MALE",
+                "first_name": "Bran",
+                "last_name": "Stark",
+                "address": {
+                    "castle": "Winterfell",
+                    "continent": "Westeros",
+                    "region": "THE_NORTH"
+                },
+                "gender": "MALE"
+            }
+        ],
+        "gender": "MALE"
     },
 
     {

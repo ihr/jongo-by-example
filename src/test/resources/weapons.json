@@ -2,5 +2,5 @@
     { "_id" : "Lightbringer" },
     { "_id" : "Longclaw", material: "Valyrian steel" },
     { "_id" : "Dark Sister", material: "Valyrian steel" },
-    { "_id" : "Ice", material: "Valyrian steel" },
+    { "_id" : "Ice", material: "Valyrian steel" }
 ]

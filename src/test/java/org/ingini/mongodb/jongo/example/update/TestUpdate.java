@@ -6,11 +6,12 @@ import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
 import org.bson.types.ObjectId;
 import org.ingini.mongodb.jongo.example.domain.beasts.DireWolf;
-import org.ingini.mongodb.jongo.example.domain.heroes.Hero;
-import org.ingini.mongodb.jongo.example.domain.heroes.Heroine;
-import org.ingini.mongodb.jongo.example.domain.heroes.Human;
+import org.ingini.mongodb.jongo.example.domain.characters.Hero;
+import org.ingini.mongodb.jongo.example.domain.characters.Heroine;
+import org.ingini.mongodb.jongo.example.domain.characters.HumanCharacter;
 import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
 import org.ingini.mongodb.jongo.example.domain.weapons.WeaponDetails;
+import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
@@ -39,22 +40,24 @@ import static org.fest.assertions.Assertions.assertThat;
 public class TestUpdate {
 
     public static final String WEAPONS = "weapons";
-    public static final String HEROES = "heroes";
-    public static final String DB_NAME = "jongo_by_example";
+    public static final String CHARACTERS = "characters";
+    public static final String DB_NAME = "db_for_jongo";
 
     public static DB mongoDB;
 
     public static MongoCollection weapons;
 
-    public static MongoCollection heroes;
+    public static MongoCollection characters;
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
         mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
+        CollectionManager.cleanAndFill(mongoDB, "weapons.json", WEAPONS);
+
         Jongo jongo = new Jongo(mongoDB);
         weapons = jongo.getCollection(WEAPONS);
-        heroes = jongo.getCollection(HEROES);
+        characters = jongo.getCollection(CHARACTERS);
     }
 
     @Test
@@ -79,11 +82,11 @@ public class TestUpdate {
     @Test
     public void shouldAddADireWolfForEachStarkChild() {
         //GIVEN
-        Hero eddardStark = heroes.findOne(new ObjectId("52516b563004ba6b745e864f")).as(Hero.class);
+        Hero eddardStark = characters.findOne(new ObjectId("5259a7fd3004e5974542c5e9")).as(Hero.class);
 
-        Set<Human> updatedChildren = Sets.newHashSet();
+        Set<HumanCharacter> updatedChildren = Sets.newHashSet();
 
-        for (Human child : eddardStark.getChildren()) {
+        for (HumanCharacter child : eddardStark.getChildren()) {
             if (child.getFirstName().equals("Robb")) {
                 updatedChildren.add(Hero.addBeast((Hero) child, new DireWolf("Grey Wind")));
             }
@@ -112,7 +115,7 @@ public class TestUpdate {
         Hero updatedEddardStark = Hero.updateChildren(eddardStark, updatedChildren);
 
         //WHEN
-        WriteResult save = heroes.save(updatedEddardStark);
+        WriteResult save = characters.save(updatedEddardStark);
 
         //THEN
         assertThat(save.getError()).isNull();

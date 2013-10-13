@@ -31,7 +31,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class TestDelete {
 
     public static final String WEAPONS = "weapons";
-    public static final String DB_NAME = "jongo_by_example";
+    public static final String DB_NAME = "db_for_jongo";
 
     public static DB mongoDB;
 

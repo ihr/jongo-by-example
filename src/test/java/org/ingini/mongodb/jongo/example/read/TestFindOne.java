@@ -6,10 +6,10 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import org.bson.LazyDBList;
 import org.bson.types.ObjectId;
-import org.ingini.mongodb.jongo.example.domain.heroes.Gender;
-import org.ingini.mongodb.jongo.example.domain.heroes.Hero;
-import org.ingini.mongodb.jongo.example.domain.heroes.Heroine;
-import org.ingini.mongodb.jongo.example.domain.heroes.Human;
+import org.ingini.mongodb.jongo.example.domain.characters.Gender;
+import org.ingini.mongodb.jongo.example.domain.characters.Hero;
+import org.ingini.mongodb.jongo.example.domain.characters.Heroine;
+import org.ingini.mongodb.jongo.example.domain.characters.HumanCharacter;
 import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -39,21 +39,21 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class TestFindOne {
 
-    public static final String HEROES = "heroes";
-    public static final String DB_NAME = "jongo_by_example";
+    public static final String CHARACTERS = "characters";
+    public static final String DB_NAME = "db_for_jongo";
 
     public static DB mongoDB;
 
-    public static MongoCollection heroes;
+    public static MongoCollection characters;
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
         mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
-        CollectionManager.cleanAndFill(mongoDB, "heroes.json", HEROES);
+        CollectionManager.cleanAndFill(mongoDB, "characters.json", CHARACTERS);
 
         Jongo jongo = new Jongo(mongoDB);
-        heroes = jongo.getCollection(HEROES);
+        characters = jongo.getCollection(CHARACTERS);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class TestFindOne {
         //GIVEN
 
         //WHEN
-        Hero hero = heroes.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").as(Hero.class);
+        Hero hero = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").as(Hero.class);
 
         //THEN
         assertThat(hero).isNotNull();
@@ -73,7 +73,7 @@ public class TestFindOne {
         //GIVEN
 
         //WHEN
-        Hero hero = heroes.findOne(new ObjectId("52516b563004ba6b745e864f")).as(Hero.class);
+        Hero hero = characters.findOne(new ObjectId("52516b563004ba6b745e864f")).as(Hero.class);
 
         //THEN
         assertThat(hero).isNotNull();
@@ -86,7 +86,7 @@ public class TestFindOne {
         //GIVEN
 
         //WHEN
-        Heroine heroine = heroes.findOne("{" + Human.GENDER + ": #, " + Human.FIRST_NAME + ": #}", Gender.FEMALE, "Arya")//
+        Heroine heroine = characters.findOne("{" + HumanCharacter.GENDER + ": #, " + HumanCharacter.FIRST_NAME + ": #}", Gender.FEMALE, "Arya")//
                 .as(Heroine.class);
 
         //THEN
@@ -99,11 +99,11 @@ public class TestFindOne {
         //GIVEN
 
         //WHEN
-        Heroine heroine = heroes.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").projection("{children: {$elemMatch: {" + Human.FIRST_NAME + ": #, " + //
-                Human.LAST_NAME + ": #}}}", "Sansa", "Stark").map(new ResultHandler<Heroine>() {
+        Heroine heroine = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").projection("{children: {$elemMatch: {" + HumanCharacter.FIRST_NAME + ": #, " + //
+                HumanCharacter.LAST_NAME + ": #}}}", "Sansa", "Stark").map(new ResultHandler<Heroine>() {
             @Override
             public Heroine map(DBObject result) {
-                LazyDBList o = (LazyDBList) result.get(Human.CHILDREN);
+                LazyDBList o = (LazyDBList) result.get(HumanCharacter.CHILDREN);
                 DBObject basicDbObject = (DBObject) o.get(0);
                 ObjectMapper objectMapper = new ObjectMapper();
                 String content = basicDbObject.toString();

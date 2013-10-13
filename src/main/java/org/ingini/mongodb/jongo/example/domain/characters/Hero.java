@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.domain.heroes;
+package org.ingini.mongodb.jongo.example.domain.characters;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,14 +28,14 @@ import java.util.Set;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Immutable
-public class Hero extends Human {
+public class Hero extends HumanCharacter {
 
     @JsonCreator
     Hero(@JsonProperty(ID) String _id,
          @JsonProperty(FIRST_NAME) String firstName,
          @JsonProperty(LAST_NAME) String lastName,
          @JsonProperty(ADDRESS) Address address,
-         @JsonProperty(CHILDREN) Set<? extends Human> children,
+         @JsonProperty(CHILDREN) Set<? extends HumanCharacter> children,
          @JsonProperty(BEASTS) Set<? extends Beast> beasts) {
         super(_id, firstName, lastName, Gender.MALE, address, children, beasts);
     }
@@ -44,7 +44,7 @@ public class Hero extends Human {
         return new Hero(null, firstName, lastName, address, null, null);
     }
 
-    public static Hero createHeroWithoutBeasts(String firstName, String lastName, Address address, Set<? extends Human> children) {
+    public static Hero createHeroWithoutBeasts(String firstName, String lastName, Address address, Set<? extends HumanCharacter> children) {
         return new Hero(null, firstName, lastName, address, children, null);
     }
 
@@ -53,7 +53,7 @@ public class Hero extends Human {
                 hero.getChildren(), Sets.newHashSet(beast));
     }
 
-    public static Hero updateChildren(Hero hero, Set<? extends Human> children) {
+    public static Hero updateChildren(Hero hero, Set<? extends HumanCharacter> children) {
         return new Hero(hero.getId(), hero.getFirstName(), hero.getLastName(), hero.getAddress(), children, hero.getBeasts());
     }
 

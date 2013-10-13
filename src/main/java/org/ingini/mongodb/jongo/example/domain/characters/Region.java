@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.domain.heroes;
+package org.ingini.mongodb.jongo.example.domain.characters;
 
 /**
  * Copyright (c) 2013 Ivan Hristov

@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.domain.heroes;
+package org.ingini.mongodb.jongo.example.domain.characters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -30,13 +30,13 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * limitations under the License.
  */
 
-@JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = Human.GENDER)
+@JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = HumanCharacter.GENDER)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Heroine.class, name = Gender.Constants.FEMALE_VALUE),
         @JsonSubTypes.Type(value = Hero.class, name = Gender.Constants.MALE_VALUE)
 })
 @Immutable
-public abstract class Human {
+public abstract class HumanCharacter {
 
     public static final String ID = "_id";
     public static final String FIRST_NAME = "first_name";
@@ -53,16 +53,16 @@ public abstract class Human {
     private final String lastName;
     private final Gender gender;
     private final Address address;
-    private final Set<? extends Human> children;
+    private final Set<? extends HumanCharacter> children;
     private final Set<? extends Beast> beasts;
 
-    protected Human(String firstName, String lastName, Gender gender, Address address,
-                    Set<? extends Human> children, Set<? extends Beast> beasts) {
+    protected HumanCharacter(String firstName, String lastName, Gender gender, Address address,
+                             Set<? extends HumanCharacter> children, Set<? extends Beast> beasts) {
        this(null, firstName, lastName, gender, address, children, beasts);
     }
 
-    protected Human(String _id, String firstName, String lastName, Gender gender, Address address,
-                    Set<? extends Human> children, Set<? extends Beast> beasts) {
+    protected HumanCharacter(String _id, String firstName, String lastName, Gender gender, Address address,
+                             Set<? extends HumanCharacter> children, Set<? extends Beast> beasts) {
         this._id = _id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -98,7 +98,7 @@ public abstract class Human {
     }
 
     @JsonProperty(CHILDREN)
-    public Set<? extends Human> getChildren() {
+    public Set<? extends HumanCharacter> getChildren() {
         return children;
     }
 
@@ -112,11 +112,11 @@ public abstract class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Human human = (Human) o;
+        HumanCharacter humanCharacter = (HumanCharacter) o;
 
-        return new EqualsBuilder().append(this.firstName, human.firstName).append(this.lastName, human.lastName)
-                .append(this.gender, human.gender).append(this.address, this.address)
-                .append(this.beasts, human.beasts).isEquals();
+        return new EqualsBuilder().append(this.firstName, humanCharacter.firstName).append(this.lastName, humanCharacter.lastName)
+                .append(this.gender, humanCharacter.gender).append(this.address, this.address)
+                .append(this.beasts, humanCharacter.beasts).isEquals();
     }
 
     @Override

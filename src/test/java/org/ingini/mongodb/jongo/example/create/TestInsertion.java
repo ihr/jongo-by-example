@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
-import org.ingini.mongodb.jongo.example.domain.heroes.*;
+import org.ingini.mongodb.jongo.example.domain.characters.*;
 import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -33,13 +33,13 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class TestInsertion {
 
-    public static final String HEROES = "heroes";
+    public static final String CHARACTERS = "characters";
     public static final String WEAPONS = "weapons";
-    public static final String DB_NAME = "jongo_by_example";
+    public static final String DB_NAME = "db_for_jongo";
 
     public static DB mongoDB;
 
-    public static MongoCollection heroes;
+    public static MongoCollection characters;
     public static MongoCollection weapons;
 
     @BeforeClass
@@ -47,7 +47,7 @@ public class TestInsertion {
         mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         Jongo jongo = new Jongo(mongoDB);
-        heroes = jongo.getCollection(HEROES);
+        characters = jongo.getCollection(CHARACTERS);
         weapons = jongo.getCollection(WEAPONS);
     }
 
@@ -58,7 +58,7 @@ public class TestInsertion {
                 new Address("Winterfell", "Westeros", Region.THE_NORTH));
 
         //WHEN
-        WriteResult insert = heroes.insert(aryaStark);
+        WriteResult insert = characters.insert(aryaStark);
 
         //THEN
         assertThat(insert.getError()).isNull();
@@ -69,7 +69,7 @@ public class TestInsertion {
         //GIVEN
         Address castleWinterfell = new Address("Winterfell", "Westeros", Region.THE_NORTH);
 
-        Set<Human> children = Sets.newHashSet();
+        Set<HumanCharacter> children = Sets.newHashSet();
         children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Robb", "Stark", castleWinterfell));
         children.add(Heroine.createHeroineWithoutChildrenAndNoBeasts("Sansa", "Stark", castleWinterfell));
         children.add(Heroine.createHeroineWithoutChildrenAndNoBeasts("Arya", "Stark", castleWinterfell));
@@ -80,7 +80,7 @@ public class TestInsertion {
         Hero eddardStark = Hero.createHeroWithoutBeasts("Eddard", "Stark", castleWinterfell, children);
 
         //WHEN
-        WriteResult insert = heroes.insert(eddardStark);
+        WriteResult insert = characters.insert(eddardStark);
 
         //THEN
         assertThat(insert.getError()).isNull();

@@ -1,4 +1,4 @@
-package org.ingini.mongodb.jongo.example.domain.heroes;
+package org.ingini.mongodb.jongo.example.domain.characters;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,13 +27,13 @@ import java.util.Set;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Immutable
-public class Heroine extends Human {
+public class Heroine extends HumanCharacter {
 
     @JsonCreator
     public Heroine(@JsonProperty(FIRST_NAME) String firstName,
                    @JsonProperty(LAST_NAME) String lastName,
                    @JsonProperty(ADDRESS) Address address,
-                   @JsonProperty(CHILDREN) Set<? extends Human> children,
+                   @JsonProperty(CHILDREN) Set<? extends HumanCharacter> children,
                    @JsonProperty(BEASTS) Set<? extends Beast> beasts) {
         super(firstName, lastName, Gender.FEMALE, address, children, beasts);
     }

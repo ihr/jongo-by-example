@@ -32,7 +32,7 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class TestFind {
     public static final String WEAPONS = "weapons";
-    public static final String DB_NAME = "jongo_by_example";
+    public static final String DB_NAME = "db_for_jongo";
 
     public static MongoCollection weapons;
     private static DB mongoDB;

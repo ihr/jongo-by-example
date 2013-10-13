@@ -26,8 +26,8 @@ public class StateData {
     public static final String TOTAL_POPULATION = "totalPop";
 
     @Id
-    public final String _id;
-    public final int totalPopulation;
+    private final String _id;
+    private final int totalPopulation;
 
     public StateData(@JsonProperty(ID) String _id, @JsonProperty(TOTAL_POPULATION) int totalPopulation) {
         this._id = _id;
