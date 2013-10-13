@@ -1,8 +1,8 @@
 package org.ingini.mongodb.jongo.example.domain.weapons;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.jongo.marshall.jackson.oid.Id;
 
 /**
@@ -20,8 +20,9 @@ import org.jongo.marshall.jackson.oid.Id;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, include = JsonTypeInfo.As.PROPERTY, property = "_class")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Weapon {
+public abstract class Weapon {
 
     public static final String ID = "_id";
     public static final String MATERIAL = "material";
@@ -35,8 +36,7 @@ public class Weapon {
 
     private final WeaponDetails details;
 
-    @JsonCreator
-    public Weapon(@JsonProperty(ID) String _id, @JsonProperty(MATERIAL) String material, @JsonProperty(DETAILS) WeaponDetails details) {
+    public Weapon(String _id, String material, WeaponDetails details) {
         this._id = _id;
         this.material = material;
         this.details = details;

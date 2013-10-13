@@ -3,7 +3,7 @@ package org.ingini.mongodb.jongo.example.delete;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
-import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
+import org.ingini.mongodb.jongo.example.domain.weapons.Sword;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
@@ -49,11 +49,11 @@ public class TestDelete {
     @Test
     public void shouldDeleteSingleDocumentById() {
         //GIVEN
-        String id = "Lightbringer";
-        weapons.save(new Weapon(id, null, null));
+        String name = "Lightbringer";
+        weapons.save(new Sword(name));
 
         //WHEN
-        WriteResult result = weapons.remove("{id: #}", id);
+        WriteResult result = weapons.remove("{id: #}", name);
 
         //THEN
         assertThat(result.getError()).isNull();

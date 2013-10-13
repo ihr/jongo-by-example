@@ -3,7 +3,7 @@ package org.ingini.mongodb.jongo.example.read;
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
-import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
+import org.ingini.mongodb.jongo.example.domain.weapons.Sword;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
@@ -50,14 +50,14 @@ public class TestFindWithRegex {
         //GIVEN
         weapons.remove();
 
-        weapons.insert("{ \"_id\" : \"Lightbringer\" }");
-        weapons.insert("{ \"_id\" : \"Longclaw\", material: \"Valyrian steel\" }");
-        weapons.insert("{ \"_id\" : \"Dark Sister\", material: \"Valyrian steel\" }");
-        weapons.insert("{ \"_id\" : \"Ice\", material: \"Valyrian steel\" }");
+        weapons.insert("{ \"_id\" : \"Lightbringer\", \"_class\" : \".Sword\" }");
+        weapons.insert("{ \"_id\" : \"Longclaw\", \"_class\" : \".Sword\", material: \"Valyrian steel\" }");
+        weapons.insert("{ \"_id\" : \"Dark Sister\", \"_class\" : \".Sword\", material: \"Valyrian steel\" }");
+        weapons.insert("{ \"_id\" : \"Ice\", \"_class\" : \".Sword\", material: \"Valyrian steel\" }");
 
         //WHEN
-        List<Weapon> swordsOfSteel = Lists.newArrayList(weapons
-                .find("{" + Weapon.MATERIAL + ": {$regex: #}}", "steel.*").as(Weapon.class));
+        List<Sword> swordsOfSteel = Lists.newArrayList(weapons
+                .find("{" + Sword.MATERIAL + ": {$regex: #}}", "steel.*").as(Sword.class));
 
         //THEN
         assertThat(swordsOfSteel).isNotEmpty();
@@ -69,14 +69,14 @@ public class TestFindWithRegex {
         //GIVEN
         weapons.remove();
 
-        weapons.insert("{ \"_id\" : \"Lightbringer\" }");
-        weapons.insert("{ \"_id\" : \"Longclaw\", material: \"Valyrian steel\" }");
-        weapons.insert("{ \"_id\" : \"Dark Sister\", material: \"Valyrian steel\" }");
-        weapons.insert("{ \"_id\" : \"Ice\", material: \"Valyrian steel\" }");
+        weapons.insert("{ \"_id\" : \"Lightbringer\", \"_class\" : \".Sword\" }");
+        weapons.insert("{ \"_id\" : \"Longclaw\", \"_class\" : \".Sword\", material: \"Valyrian steel\" }");
+        weapons.insert("{ \"_id\" : \"Dark Sister\", \"_class\" : \".Sword\", material: \"Valyrian steel\" }");
+        weapons.insert("{ \"_id\" : \"Ice\", \"_class\" : \".Sword\", material: \"Valyrian steel\" }");
 
         //WHEN
-        List<Weapon> swordsOfSteel = Lists.newArrayList(weapons
-                .find("{" + Weapon.MATERIAL + ": #}", Pattern.compile("steel.*")).as(Weapon.class));
+        List<Sword> swordsOfSteel = Lists.newArrayList(weapons
+                .find("{" + Sword.MATERIAL + ": #}", Pattern.compile("steel.*")).as(Sword.class));
 
         //THEN
         assertThat(swordsOfSteel).isNotEmpty();

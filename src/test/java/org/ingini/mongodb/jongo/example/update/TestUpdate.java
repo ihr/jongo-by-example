@@ -9,7 +9,7 @@ import org.ingini.mongodb.jongo.example.domain.beasts.DireWolf;
 import org.ingini.mongodb.jongo.example.domain.characters.Hero;
 import org.ingini.mongodb.jongo.example.domain.characters.Heroine;
 import org.ingini.mongodb.jongo.example.domain.characters.HumanCharacter;
-import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
+import org.ingini.mongodb.jongo.example.domain.weapons.Sword;
 import org.ingini.mongodb.jongo.example.domain.weapons.WeaponDetails;
 import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
@@ -72,7 +72,7 @@ public class TestUpdate {
         assertThat(lightbringer.getError()).isNull();
 
         //AND WHEN
-        Weapon weapon = weapons.findOne("{_id: 'Lightbringer'}").as(Weapon.class);
+        Sword weapon = weapons.findOne("{_id: 'Lightbringer'}").as(Sword.class);
 
 
         //THEN

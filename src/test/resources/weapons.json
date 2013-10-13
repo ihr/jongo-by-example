@@ -1,6 +1,25 @@
 [
-    { "_id" : "Lightbringer" },
-    { "_id" : "Longclaw", material: "Valyrian steel" },
-    { "_id" : "Dark Sister", material: "Valyrian steel" },
-    { "_id" : "Ice", material: "Valyrian steel" }
+    {
+        "_id": "Lightbringer",
+        "_class": ".Sword"
+    },
+    {
+        "_id": "Longclaw",
+        "_class": ".Sword",
+        "material": "Valyrian steel"
+    },
+    {
+        "_id": "Dark Sister",
+        "_class": ".Sword",
+        "material": "Valyrian steel"
+    },
+    {
+        "_id": "Ice",
+        "_class": ".Sword",
+        "material": "Valyrian steel"
+    },
+    {
+        "_id": "Dragonbone",
+        "_class": ".Bow"
+    }
 ]

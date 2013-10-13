@@ -5,7 +5,8 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
 import org.ingini.mongodb.jongo.example.domain.characters.*;
-import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
+import org.ingini.mongodb.jongo.example.domain.weapons.Bow;
+import org.ingini.mongodb.jongo.example.domain.weapons.Sword;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
@@ -87,14 +88,17 @@ public class TestInsertion {
     }
 
     @Test
-    public void shouldInsertOneSwordWithCustomObjectId() {
+    public void shouldInsertOneSwordAndOneBowWithCustomObjectId() {
         //GIVEN
-        Weapon lightbringer = new Weapon("Lightbringer", null, null);
+        Sword lightbringer = new Sword("Lightbringer");
+        Bow dragonboneBow = new Bow("Dragonbone");
 
         //WHEN
-        WriteResult insert = weapons.save(lightbringer);
+        WriteResult swordInsertResult = weapons.save(lightbringer);
+        WriteResult bowInsertResult = weapons.save(dragonboneBow);
 
         //THEN
-        assertThat(insert.getError()).isNull();
+        assertThat(swordInsertResult.getError()).isNull();
+        assertThat(bowInsertResult.getError()).isNull();
     }
 }
