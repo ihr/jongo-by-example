@@ -42,30 +42,16 @@ public class TestFindOne {
     public static final String CHARACTERS = "characters";
     public static final String DB_NAME = "db_for_jongo";
 
-    public static DB mongoDB;
-
     public static MongoCollection characters;
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
-        mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
+        DB mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         CollectionManager.cleanAndFill(mongoDB, "characters.json", CHARACTERS);
 
         Jongo jongo = new Jongo(mongoDB);
         characters = jongo.getCollection(CHARACTERS);
-    }
-
-    @Test
-    public void shouldFindOneEntryBasedOnOIDOperator() {
-        //GIVEN
-
-        //WHEN
-        Hero hero = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").as(Hero.class);
-
-        //THEN
-        assertThat(hero).isNotNull();
-
     }
 
     @Test
@@ -78,6 +64,17 @@ public class TestFindOne {
         //THEN
         assertThat(hero).isNotNull();
 
+    }
+
+    @Test
+    public void shouldFindOneEntryBasedOnOIDOperator() {
+        //GIVEN
+
+        //WHEN
+        Hero hero = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f").as(Hero.class);
+
+        //THEN
+        assertThat(hero).isNotNull();
     }
 
 
@@ -94,12 +91,17 @@ public class TestFindOne {
 
     }
 
+    /**
+     * db.characters.find({_id:ObjectId("52516b563004ba6b745e864f")},
+     *                    {children: {$elemMatch: {first_name: 'Sansa', last_name: 'Stark'}}}
+     *                    );
+     */
     @Test
     public void shouldFindOneArrayElement() {
         //GIVEN
 
         //WHEN
-        Heroine heroine = characters.findOne("{_id : {$oid: #}}", "52516b563004ba6b745e864f")
+        Heroine heroine = characters.findOne(new ObjectId("52516b563004ba6b745e864f"))
                 .projection("{children: {$elemMatch: {" + FIRST_NAME + ": #, " + LAST_NAME + ": #}}}", "Sansa", "Stark")
                 .map(new ResultHandler<Heroine>() {
                     @Override
@@ -118,6 +120,8 @@ public class TestFindOne {
 
         //THEN
         assertThat(heroine).isNotNull();
+        assertThat(heroine.getFirstName()).isEqualTo("Sansa");
+        assertThat(heroine.getLastName()).isEqualTo("Stark");
 
     }
 }

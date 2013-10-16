@@ -4,6 +4,7 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
 import org.ingini.mongodb.jongo.example.domain.weapons.Sword;
+import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
@@ -33,30 +34,30 @@ public class TestDelete {
     public static final String WEAPONS = "weapons";
     public static final String DB_NAME = "db_for_jongo";
 
-    public static DB mongoDB;
-
     public static MongoCollection weapons;
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
-        mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
+        DB mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         Jongo jongo = new Jongo(mongoDB);
         weapons = jongo.getCollection(WEAPONS);
+
+        CollectionManager.cleanAndFill(mongoDB, "weapons.json", WEAPONS);
     }
 
 
     @Test
     public void shouldDeleteSingleDocumentById() {
         //GIVEN
-        String name = "Lightbringer";
-        weapons.save(new Sword(name));
+        assertThat(weapons.findOne("{_id: 'Lightbringer'}").as(Sword.class)).isNotNull();
 
         //WHEN
-        WriteResult result = weapons.remove("{id: #}", name);
+        WriteResult result = weapons.remove("{_id: 'Lightbringer'}");
 
         //THEN
         assertThat(result.getError()).isNull();
+        assertThat(weapons.findOne("{_id: 'Lightbringer'}").as(Sword.class)).isNull();
 
 
     }

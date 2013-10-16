@@ -31,7 +31,7 @@ import java.util.Set;
 public class Hero extends HumanCharacter {
 
     @JsonCreator
-    Hero(@JsonProperty(ID) String _id,
+    public Hero(@JsonProperty(ID) String _id,
          @JsonProperty(FIRST_NAME) String firstName,
          @JsonProperty(LAST_NAME) String lastName,
          @JsonProperty(ADDRESS) Address address,

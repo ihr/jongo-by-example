@@ -43,7 +43,6 @@ public class TestUpdate {
     public static final String CHARACTERS = "characters";
     public static final String DB_NAME = "db_for_jongo";
 
-    public static DB mongoDB;
 
     public static MongoCollection weapons;
 
@@ -51,7 +50,7 @@ public class TestUpdate {
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
-        mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
+        DB mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         CollectionManager.cleanAndFill(mongoDB, "weapons.json", WEAPONS);
 
@@ -77,6 +76,7 @@ public class TestUpdate {
 
         //THEN
         assertThat(weapon).isNotNull();
+        assertThat(weapon.getDetails()).isEqualTo(details);
     }
 
     @Test

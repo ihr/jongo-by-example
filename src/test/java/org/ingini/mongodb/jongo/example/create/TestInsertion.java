@@ -1,7 +1,6 @@
 package org.ingini.mongodb.jongo.example.create;
 
 import com.google.common.collect.Sets;
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
 import org.ingini.mongodb.jongo.example.domain.characters.*;
@@ -38,16 +37,12 @@ public class TestInsertion {
     public static final String WEAPONS = "weapons";
     public static final String DB_NAME = "db_for_jongo";
 
-    public static DB mongoDB;
-
     public static MongoCollection characters;
     public static MongoCollection weapons;
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
-        mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
-
-        Jongo jongo = new Jongo(mongoDB);
+        Jongo jongo = new Jongo(new MongoClient("127.0.0.1", 27017).getDB(DB_NAME));
         characters = jongo.getCollection(CHARACTERS);
         weapons = jongo.getCollection(WEAPONS);
     }

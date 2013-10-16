@@ -31,8 +31,7 @@
                     "castle": "Winterfell",
                     "continent": "Westeros",
                     "region": "THE_NORTH"
-                },
-                "gender": "MALE"
+                }
             },
             {
                 "gender": "MALE",
@@ -42,8 +41,7 @@
                     "castle": "Winterfell",
                     "continent": "Westeros",
                     "region": "THE_NORTH"
-                },
-                "gender": "MALE"
+                }
             },
             {
                 "gender": "FEMALE",
@@ -53,8 +51,7 @@
                     "castle": "Winterfell",
                     "continent": "Westeros",
                     "region": "THE_NORTH"
-                },
-                "gender": "FEMALE"
+                }
             },
             {
                 "gender": "FEMALE",
@@ -64,8 +61,7 @@
                     "castle": "Winterfell",
                     "continent": "Westeros",
                     "region": "THE_NORTH"
-                },
-                "gender": "FEMALE"
+                }
             },
             {
                 "gender": "MALE",
@@ -75,8 +71,7 @@
                     "castle": "Winterfell",
                     "continent": "Westeros",
                     "region": "THE_NORTH"
-                },
-                "gender": "MALE"
+                }
             },
             {
                 "gender": "MALE",
@@ -86,11 +81,9 @@
                     "castle": "Winterfell",
                     "continent": "Westeros",
                     "region": "THE_NORTH"
-                },
-                "gender": "MALE"
+                }
             }
-        ],
-        "gender": "MALE"
+        ]
     },
 
     {
@@ -118,8 +111,7 @@
                         "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Lady"
                     }
-                ],
-                "gender": "FEMALE"
+                ]
             },
             {
                 "gender": "FEMALE",
@@ -135,8 +127,7 @@
                         "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Nymeria"
                     }
-                ],
-                "gender": "FEMALE"
+                ]
             },
             {
                 "gender": "MALE",
@@ -152,8 +143,7 @@
                         "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Grey Wind"
                     }
-                ],
-                "gender": "MALE"
+                ]
             },
             {
                 "gender": "MALE",
@@ -169,8 +159,7 @@
                         "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Ghost"
                     }
-                ],
-                "gender": "MALE"
+                ]
             },
             {
                 "gender": "MALE",
@@ -186,8 +175,7 @@
                         "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Summer"
                     }
-                ],
-                "gender": "MALE"
+                ]
             },
             {
                 "gender": "MALE",
@@ -203,11 +191,9 @@
                         "_class": "org.ingini.mongodb.jongo.example.domain.beasts.DireWolf",
                         "name": "Shaggydog"
                     }
-                ],
-                "gender": "MALE"
+                ]
             }
-        ],
-        "gender": "MALE"
+        ]
     }
 
 ]

@@ -54,8 +54,8 @@ public class TestAggregationFramework {
      * Example taken from http://docs.mongodb.org/manual/tutorial/aggregation-examples/#aggregations-using-the-zip-code-data-set
      * Command line import: mongoimport --drop -d aggregation_test_db -c zipcodes zips.json
      * <p>
-     *      db.zipcodes.aggregate(  { $group : { _id : "$state", totalPop : { $sum : "$pop" } } },
-     *                              { $match : {totalPop : { $gt : 10*1000*1000 } } } )
+     *      db.zip_codes.aggregate(  { $group : { _id : "$state", totalPop : { $sum : "$pop" } } },
+                                    { $match : {totalPop : { $gt : 10*1000*1000 } } } )
      * </p>
      */
     @Test
@@ -77,10 +77,10 @@ public class TestAggregationFramework {
      * Command line import: mongoimport --drop --db aggregation_test_db --collection name_days name_days.json
      * <p>
      *      db.name_days.aggregate({$project : {names : 1, _id : 0}},
-     *                             {$unwind : '$names'},
-     *                             {$group : {_id: '$names', counter: {$sum: 1}}},
-     *                             {$sort : {counter: -1}},
-     *                             {$limit : 10});
+                                   {$unwind : '$names'},
+                                   {$group : {_id: '$names', counter: {$sum: 1}}},
+                                   {$sort : {counter: -1}},
+                                   {$limit : 10});
      * </p>
      */
     @Test

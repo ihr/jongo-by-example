@@ -3,6 +3,8 @@ package org.ingini.mongodb.jongo.example.domain.weapons;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -51,5 +53,20 @@ public class WeaponDetails {
                 .append("prophecy", prophecy)
                 .append("creator", creator)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WeaponDetails)) return false;
+
+        WeaponDetails that = (WeaponDetails) o;
+
+        return new EqualsBuilder().append(this.prophecy, that.prophecy).append(this.creator, that.creator).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(59, 43).append(prophecy).append(creator).toHashCode();
     }
 }

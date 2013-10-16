@@ -54,13 +54,13 @@ public class TestGeoSpatial {
      * <p>
      * <p/>
      * db.zip_codes.find({loc: {$near : {$geometry : {type: 'Point', coordinates: [-122.252696, 37.900933] }},
-     * $maxDistance: 10*1000 }});
+      $maxDistance: 10*1000 }});
      * </p>
      */
     @Test
     public void shouldFindAllTownsWithinRadius10km() {
         //GIVEN
-        int lowerLimit = 10 * 1000;
+        int lowerLimit = 10 * 1000; //in meters
 
         //WHEN
         List<ZipData> results = Lists.newArrayList(zipCodes.find("{loc: {$near : {$geometry : {type: 'Point', " +
