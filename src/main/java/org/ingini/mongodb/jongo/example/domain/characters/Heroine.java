@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 import org.ingini.mongodb.jongo.example.domain.beasts.Beast;
+import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Set;
@@ -34,18 +35,23 @@ public class Heroine extends HumanCharacter {
                    @JsonProperty(LAST_NAME) String lastName,
                    @JsonProperty(ADDRESS) Address address,
                    @JsonProperty(CHILDREN) Set<? extends HumanCharacter> children,
-                   @JsonProperty(BEASTS) Set<? extends Beast> beasts) {
-        super(firstName, lastName, Gender.FEMALE, address, children, beasts);
+                   @JsonProperty(BEASTS) Set<? extends Beast> beasts,
+                   @JsonProperty(WEAPON) Weapon weapon) {
+        super(firstName, lastName, Gender.FEMALE, address, children, beasts, weapon);
     }
 
     public static Heroine createHeroineWithoutChildrenAndNoBeasts(String firstName, String lastName,
-                                                                  Address address) {
-        return new Heroine(firstName, lastName, address, null, null);
+                                                                  Address address, Weapon weapon) {
+        return new Heroine(firstName, lastName, address, null, null, weapon);
     }
 
     public static Heroine addBeast(Heroine heroine, Beast beast) {
         return new Heroine(heroine.getFirstName(), heroine.getLastName(), heroine.getAddress(),
-                heroine.getChildren(), Sets.newHashSet(beast));
+                heroine.getChildren(), Sets.newHashSet(beast), heroine.getWeapon());
     }
 
+    public static HumanCharacter createHeroineWithoutChildrenNoBeastsAndNoWeapon(String firstName, String lastName,
+                                                                                 Address address) {
+        return createHeroineWithoutChildrenAndNoBeasts(firstName, lastName, address, null);
+    }
 }

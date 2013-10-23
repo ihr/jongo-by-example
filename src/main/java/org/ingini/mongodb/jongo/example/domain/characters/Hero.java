@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 import org.ingini.mongodb.jongo.example.domain.beasts.Beast;
+import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Set;
-
 
 
 /**
@@ -32,29 +32,35 @@ public class Hero extends HumanCharacter {
 
     @JsonCreator
     public Hero(@JsonProperty(ID) String _id,
-         @JsonProperty(FIRST_NAME) String firstName,
-         @JsonProperty(LAST_NAME) String lastName,
-         @JsonProperty(ADDRESS) Address address,
-         @JsonProperty(CHILDREN) Set<? extends HumanCharacter> children,
-         @JsonProperty(BEASTS) Set<? extends Beast> beasts) {
-        super(_id, firstName, lastName, Gender.MALE, address, children, beasts);
+                @JsonProperty(FIRST_NAME) String firstName,
+                @JsonProperty(LAST_NAME) String lastName,
+                @JsonProperty(ADDRESS) Address address,
+                @JsonProperty(CHILDREN) Set<? extends HumanCharacter> children,
+                @JsonProperty(BEASTS) Set<? extends Beast> beasts,
+                @JsonProperty(WEAPON) Weapon weapon) {
+        super(_id, firstName, lastName, Gender.MALE, address, children, beasts, weapon);
     }
 
-    public static Hero createHeroWithoutChildrenAndNoBeasts(String firstName, String lastName, Address address) {
-        return new Hero(null, firstName, lastName, address, null, null);
+    public static Hero createHeroWithoutChildrenAndNoBeasts(String firstName, String lastName, Address address, Weapon weapon) {
+        return new Hero(null, firstName, lastName, address, null, null, weapon);
     }
 
-    public static Hero createHeroWithoutBeasts(String firstName, String lastName, Address address, Set<? extends HumanCharacter> children) {
-        return new Hero(null, firstName, lastName, address, children, null);
+    public static Hero createHeroWithoutBeasts(String firstName, String lastName, Address address,
+                                               Set<? extends HumanCharacter> children, Weapon weapon) {
+        return new Hero(null, firstName, lastName, address, children, null, weapon);
     }
 
     public static Hero addBeast(Hero hero, Beast beast) {
         return new Hero(hero.getId(), hero.getFirstName(), hero.getLastName(), hero.getAddress(),
-                hero.getChildren(), Sets.newHashSet(beast));
+                hero.getChildren(), Sets.newHashSet(beast), hero.getWeapon());
     }
 
     public static Hero updateChildren(Hero hero, Set<? extends HumanCharacter> children) {
-        return new Hero(hero.getId(), hero.getFirstName(), hero.getLastName(), hero.getAddress(), children, hero.getBeasts());
+        return new Hero(hero.getId(), hero.getFirstName(), hero.getLastName(), hero.getAddress(), children,
+                hero.getBeasts(), hero.getWeapon());
     }
 
+    public static HumanCharacter createHeroWithoutChildrenNoBeastsAndNoWeapon(String firstName, String lastName, Address address) {
+        return createHeroWithoutChildrenAndNoBeasts(firstName, lastName, address, null);
+    }
 }

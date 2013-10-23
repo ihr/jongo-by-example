@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.ingini.mongodb.jongo.example.domain.beasts.Beast;
+import org.ingini.mongodb.jongo.example.domain.weapons.Weapon;
 import org.jongo.marshall.jackson.oid.ObjectId;
 
 import javax.annotation.concurrent.Immutable;
@@ -45,6 +46,7 @@ public abstract class HumanCharacter {
     public static final String ADDRESS = "address";
     public static final String CHILDREN = "children";
     public static final String BEASTS = "beasts";
+    public static final String WEAPON = "weapon";
 
     @ObjectId
     private String _id;
@@ -55,14 +57,15 @@ public abstract class HumanCharacter {
     private final Address address;
     private final Set<? extends HumanCharacter> children;
     private final Set<? extends Beast> beasts;
+    private final Weapon weapon;
 
     protected HumanCharacter(String firstName, String lastName, Gender gender, Address address,
-                             Set<? extends HumanCharacter> children, Set<? extends Beast> beasts) {
-       this(null, firstName, lastName, gender, address, children, beasts);
+                             Set<? extends HumanCharacter> children, Set<? extends Beast> beasts, Weapon weapon) {
+       this(null, firstName, lastName, gender, address, children, beasts, weapon);
     }
 
     protected HumanCharacter(String _id, String firstName, String lastName, Gender gender, Address address,
-                             Set<? extends HumanCharacter> children, Set<? extends Beast> beasts) {
+                             Set<? extends HumanCharacter> children, Set<? extends Beast> beasts, Weapon weapon) {
         this._id = _id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,6 +73,7 @@ public abstract class HumanCharacter {
         this.address = address;
         this.children = children;
         this.beasts = beasts;
+        this.weapon = weapon;
     }
 
     @JsonProperty(ID)
@@ -107,6 +111,11 @@ public abstract class HumanCharacter {
         return beasts;
     }
 
+    @JsonProperty(WEAPON)
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -116,12 +125,12 @@ public abstract class HumanCharacter {
 
         return new EqualsBuilder().append(this.firstName, humanCharacter.firstName).append(this.lastName, humanCharacter.lastName)
                 .append(this.gender, humanCharacter.gender).append(this.address, this.address)
-                .append(this.beasts, humanCharacter.beasts).isEquals();
+                .append(this.beasts, humanCharacter.beasts).append(this.weapon, humanCharacter.weapon).isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(7, 61).append(firstName).append(lastName)
-                .append(gender).append(address).append(beasts).toHashCode();
+                .append(gender).append(address).append(beasts).append(weapon).toHashCode();
     }
 }

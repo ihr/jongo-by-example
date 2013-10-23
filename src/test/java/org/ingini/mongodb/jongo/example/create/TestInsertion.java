@@ -51,7 +51,7 @@ public class TestInsertion {
     public void shouldInsertOneHeroineWithAutomaticObjectId() {
         //GIVEN
         Heroine aryaStark = Heroine.createHeroineWithoutChildrenAndNoBeasts("Arya", "Stark", //
-                new Address("Winterfell", "Westeros", Region.THE_NORTH));
+                new Address("Winterfell", "Westeros", Region.THE_NORTH), new Sword("Needle"));
 
         //WHEN
         WriteResult insert = characters.insert(aryaStark);
@@ -66,14 +66,14 @@ public class TestInsertion {
         Address castleWinterfell = new Address("Winterfell", "Westeros", Region.THE_NORTH);
 
         Set<HumanCharacter> children = Sets.newHashSet();
-        children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Robb", "Stark", castleWinterfell));
-        children.add(Heroine.createHeroineWithoutChildrenAndNoBeasts("Sansa", "Stark", castleWinterfell));
-        children.add(Heroine.createHeroineWithoutChildrenAndNoBeasts("Arya", "Stark", castleWinterfell));
-        children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Bran", "Stark", castleWinterfell));
-        children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Rickon", "Stark", castleWinterfell));
-        children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Jon", "Snow", castleWinterfell));
+        children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Robb", "Stark", castleWinterfell, new Sword("King in the North")));
+        children.add(Heroine.createHeroineWithoutChildrenNoBeastsAndNoWeapon("Sansa", "Stark", castleWinterfell));
+        children.add(Heroine.createHeroineWithoutChildrenAndNoBeasts("Arya", "Stark", castleWinterfell, new Sword("Needle")));
+        children.add(Hero.createHeroWithoutChildrenNoBeastsAndNoWeapon("Bran", "Stark", castleWinterfell));
+        children.add(Hero.createHeroWithoutChildrenNoBeastsAndNoWeapon("Rickon", "Stark", castleWinterfell));
+        children.add(Hero.createHeroWithoutChildrenAndNoBeasts("Jon", "Snow", castleWinterfell, new Sword("Longclaw")));
 
-        Hero eddardStark = Hero.createHeroWithoutBeasts("Eddard", "Stark", castleWinterfell, children);
+        Hero eddardStark = Hero.createHeroWithoutBeasts("Eddard", "Stark", castleWinterfell, children, new Sword("Ice"));
 
         //WHEN
         WriteResult insert = characters.insert(eddardStark);
