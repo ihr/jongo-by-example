@@ -11,7 +11,7 @@
     <url>https://github.com/ihr/jongo-by-example</url>
 
     <properties>
-        <jongo.version>0.4</jongo.version>
+        <jongo.version>1.0</jongo.version>
         <mongodb-driver.version>2.11.3</mongodb-driver.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <guava.version>15.0</guava.version>

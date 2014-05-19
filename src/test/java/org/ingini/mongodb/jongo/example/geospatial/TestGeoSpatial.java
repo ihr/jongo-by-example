@@ -53,8 +53,8 @@ public class TestGeoSpatial {
      * Command line import: mongoimport --drop -d aggregation_test_db -c zipcodes zips.json
      * <p>
      * <p/>
-     * db.zip_codes.find({loc: {$near : {$geometry : {type: 'Point', coordinates: [-122.252696, 37.900933] }},
-      $maxDistance: 10*1000 }});
+     * db.zip_codes.find({loc: {$near : {$geometry : {type: 'Point', coordinates: [-122.252696, 37.900933] },
+      $maxDistance: 10*1000 }}});
      * </p>
      */
     @Test
@@ -64,7 +64,7 @@ public class TestGeoSpatial {
 
         //WHEN
         List<ZipData> results = Lists.newArrayList(zipCodes.find("{loc: {$near : {$geometry : {type: 'Point', " +
-                "coordinates: [-122.252696, 37.900933] }}, $maxDistance: # }}", lowerLimit)
+                "coordinates: [-122.252696, 37.900933] }, $maxDistance: # }}}", lowerLimit)
                 .as(ZipData.class));
 
         //THEN
@@ -74,8 +74,8 @@ public class TestGeoSpatial {
     /**
      * Command line import: mongoimport --drop -d aggregation_test_db -c zipcodes zips.json
      * <p>
-     * db.zip_codes.find({loc: {$near : {$geometry : {type: 'Point', coordinates: [-122.252696, 37.900933] }},
-     * $maxDistance: 10*1000 }, pop : {$gt: 10*1000}});
+     * db.zip_codes.find({loc: {$near : {$geometry : {type: 'Point', coordinates: [-122.252696, 37.900933] },
+     * $maxDistance: 10*1000 }}, pop : {$gt: 10*1000}});
      * </p>
      */
     @Test
@@ -86,7 +86,7 @@ public class TestGeoSpatial {
 
         //WHEN
         List<ZipData> results = Lists.newArrayList(zipCodes.find("{loc: {$near : {$geometry : {type: 'Point', " +
-                "coordinates: [-122.252696, 37.900933] }}, $maxDistance: # }, pop : {$gt: #}}", lowerLimit, population)
+                "coordinates: [-122.252696, 37.900933] }, $maxDistance: # }}, pop : {$gt: #}}", lowerLimit, population)
                 .as(ZipData.class));
 
         //THEN

@@ -49,7 +49,7 @@ public abstract class HumanCharacter {
     public static final String WEAPON = "weapon";
 
     @ObjectId
-    private String _id;
+    public String _id;
 
     private final String firstName;
     private final String lastName;

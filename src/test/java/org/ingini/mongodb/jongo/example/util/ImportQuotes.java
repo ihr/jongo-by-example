@@ -4,7 +4,6 @@ import com.mongodb.MongoClient;
 import org.apache.commons.lang3.StringUtils;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URI;
@@ -33,8 +32,7 @@ import static java.nio.charset.Charset.forName;
  */
 public class ImportQuotes {
 
-    @Test
-    public void importData() throws IOException, URISyntaxException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         Jongo jongo = new Jongo(new MongoClient("127.0.0.1", 27017).getDB("movie_db"));
         MongoCollection quoteCollection = jongo.getCollection("quotes");
 
