@@ -35,7 +35,7 @@ public class TestInsertion {
 
     public static final String CHARACTERS = "characters";
     public static final String WEAPONS = "weapons";
-    public static final String DB_NAME = "db_for_jongo";
+    public static final String DB_NAME = "cooldb";
 
     public static MongoCollection characters;
     public static MongoCollection weapons;
@@ -45,6 +45,11 @@ public class TestInsertion {
         Jongo jongo = new Jongo(new MongoClient("127.0.0.1", 27017).getDB(DB_NAME));
         characters = jongo.getCollection(CHARACTERS);
         weapons = jongo.getCollection(WEAPONS);
+    }
+
+    @Test
+    public void shouldInsertOneDocumentJustLikeWithinMongoDBShell() {
+        characters.insert("{first_name: 'Eddard', second_name: 'Stark'}");
     }
 
     @Test

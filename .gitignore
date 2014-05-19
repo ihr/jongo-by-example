@@ -1,8 +1,9 @@
 .idea/
-target/
+target/*
 *.class
 *.iml
 # Package Files #
 *.jar
 *.war
 *.ear
+src/test/resources/raw/quotes.list

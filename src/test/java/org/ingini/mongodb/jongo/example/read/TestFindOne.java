@@ -11,7 +11,6 @@ import org.ingini.mongodb.jongo.example.domain.characters.Heroine;
 import org.ingini.mongodb.jongo.example.util.CollectionManager;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
-import org.jongo.ResultHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -103,18 +102,15 @@ public class TestFindOne {
         //WHEN
         Heroine heroine = characters.findOne(new ObjectId("52516b563004ba6b745e864f"))
                 .projection("{children: {$elemMatch: {" + FIRST_NAME + ": #, " + LAST_NAME + ": #}}}", "Sansa", "Stark")
-                .map(new ResultHandler<Heroine>() {
-                    @Override
-                    public Heroine map(DBObject result) {
-                        LazyDBList o = (LazyDBList) result.get(CHILDREN);
-                        DBObject basicDbObject = (DBObject) o.get(0);
-                        ObjectMapper objectMapper = new ObjectMapper();
-                        String content = basicDbObject.toString();
-                        try {
-                            return objectMapper.readValue(content, Heroine.class);
-                        } catch (IOException e) {
-                            throw new IllegalStateException("Unable to deserialize " + content);
-                        }
+                .map(result -> {
+                    LazyDBList o = (LazyDBList) result.get(CHILDREN);
+                    DBObject basicDbObject = (DBObject) o.get(0);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String content = basicDbObject.toString();
+                    try {
+                        return objectMapper.readValue(content, Heroine.class);
+                    } catch (IOException e) {
+                        throw new IllegalStateException("Unable to deserialize " + content);
                     }
                 });
 
