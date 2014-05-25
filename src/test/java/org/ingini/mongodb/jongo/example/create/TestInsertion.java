@@ -35,7 +35,7 @@ public class TestInsertion {
 
     public static final String CHARACTERS = "characters";
     public static final String WEAPONS = "weapons";
-    public static final String DB_NAME = "cooldb";
+    public static final String DB_NAME = "db_for_jongo";
 
     public static MongoCollection characters;
     public static MongoCollection weapons;
@@ -48,7 +48,7 @@ public class TestInsertion {
     }
 
     @Test
-    public void shouldInsertOneDocumentJustLikeWithinMongoDBShell() {
+    public void should_insert_a_document_just_like_within_mongodb_shell(){
         characters.insert("{first_name: 'Eddard', second_name: 'Stark'}");
     }
 

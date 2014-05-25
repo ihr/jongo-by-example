@@ -33,15 +33,15 @@ public class TestTextSearch {
 
     public static DB mongoDB;
 
-    public static MongoCollection filmQuotes;
+    public static MongoCollection quotes;
 
     @BeforeClass
     public static void beforeClass() throws UnknownHostException {
         mongoDB = new MongoClient("127.0.0.1", 27017).getDB(DB_NAME);
 
         Jongo jongo = new Jongo(mongoDB);
-        filmQuotes = jongo.getCollection(QUOTES_COLLECTION_NAME);
-        filmQuotes.ensureIndex("{movie_name: 'text', 'quotes.quote': 'text', 'quotes.character': 'text'}");
+        quotes = jongo.getCollection(QUOTES_COLLECTION_NAME);
+        quotes.ensureIndex("{movie_name: 'text', 'quotes.quote': 'text', 'quotes.character': 'text'}");
     }
 
     @Test
@@ -49,13 +49,13 @@ public class TestTextSearch {
         //GIVEN database pre-loaded with 91'630 entries
 
         //WHEN
-        long numberOfFrenchDocuments = filmQuotes.count("{$text: {$search: 'le', $language: 'french'}}");
+        long numberOfFrenchDocuments = quotes.count("{$text: {$search: 'le', $language: 'french'}}");
 
         //THEN
         assertThat(numberOfFrenchDocuments).isZero();
 
         //AND WHEN
-        long numberOfEnglishDocuments = filmQuotes.count("{$text: {$search: 'le', $language: 'english'}}");
+        long numberOfEnglishDocuments = quotes.count("{$text: {$search: 'le', $language: 'english'}}");
 
         //THEN
         assertThat(numberOfEnglishDocuments).isEqualTo(389);
@@ -66,13 +66,13 @@ public class TestTextSearch {
         //GIVEN database pre-loaded with 91'630 entries
 
         //WHEN
-        long smallCaseDocumentCount = filmQuotes.count("{$text: {$search: '\"pulp fiction\"'}}");
+        long smallCaseDocumentCount = quotes.count("{$text: {$search: '\"pulp fiction\"'}}");
 
         //THEN
         assertThat(smallCaseDocumentCount).isEqualTo(14);
 
         //AND WHEN
-        long mixedCaseDocumentCount = filmQuotes.count("{$text: {$search: '\"puLp fIcTiOn\"'}}");
+        long mixedCaseDocumentCount = quotes.count("{$text: {$search: '\"puLp fIcTiOn\"'}}");
 
         //THEN
         assertThat(smallCaseDocumentCount).isEqualTo(mixedCaseDocumentCount);
@@ -83,7 +83,7 @@ public class TestTextSearch {
         //GIVEN database pre-loaded with 91'630 entries
 
         //WHEN
-        long count = filmQuotes.count("{$text: {$search: 'pulp fiction'}}");
+        long count = quotes.count("{$text: {$search: 'pulp fiction'}}");
 
         //THEN
         assertThat(count).isEqualTo(410);

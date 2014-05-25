@@ -13,9 +13,11 @@
     <properties>
         <jongo.version>1.0</jongo.version>
         <mongodb-driver.version>2.11.3</mongodb-driver.version>
+        <!-- general purpose tools -->
         <commons-lang3.version>3.1</commons-lang3.version>
         <guava.version>15.0</guava.version>
         <jsr305.version>2.0.1</jsr305.version>
+        <!-- testing tools -->
         <fest-assert.version>1.4</fest-assert.version>
         <junit.version>4.10</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
