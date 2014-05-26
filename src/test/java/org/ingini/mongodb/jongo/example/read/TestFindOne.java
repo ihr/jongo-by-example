@@ -101,7 +101,7 @@ public class TestFindOne {
 
         //WHEN
         Heroine heroine = characters.findOne(new ObjectId("52516b563004ba6b745e864f"))
-                .projection("{children: {$elemMatch: {" + FIRST_NAME + ": #, " + LAST_NAME + ": #}}}", "Sansa", "Stark")
+                .projection("{children: {$elemMatch: {" + FIRST_NAME + ": #}}}", "Sansa")
                 .map(result -> {
                     LazyDBList o = (LazyDBList) result.get(CHILDREN);
                     DBObject basicDbObject = (DBObject) o.get(0);

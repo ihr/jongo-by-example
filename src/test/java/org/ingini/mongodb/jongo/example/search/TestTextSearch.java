@@ -58,7 +58,7 @@ public class TestTextSearch {
         long numberOfEnglishDocuments = quotes.count("{$text: {$search: 'le', $language: 'english'}}");
 
         //THEN
-        assertThat(numberOfEnglishDocuments).isEqualTo(389);
+        assertThat(numberOfEnglishDocuments).isEqualTo(395);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class TestTextSearch {
         long smallCaseDocumentCount = quotes.count("{$text: {$search: '\"pulp fiction\"'}}");
 
         //THEN
-        assertThat(smallCaseDocumentCount).isEqualTo(14);
+        assertThat(smallCaseDocumentCount).isEqualTo(13);
 
         //AND WHEN
         long mixedCaseDocumentCount = quotes.count("{$text: {$search: '\"puLp fIcTiOn\"'}}");
