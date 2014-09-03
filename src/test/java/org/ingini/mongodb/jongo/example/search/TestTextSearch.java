@@ -29,7 +29,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class TestTextSearch {
 
     public static final String DB_NAME = "movie_db";
-    public static final String QUOTES_COLLECTION_NAME = "quotes";
+        public static final String QUOTES_COLLECTION_NAME = "quotes";
 
     public static DB mongoDB;
 
@@ -43,6 +43,11 @@ public class TestTextSearch {
         quotes = jongo.getCollection(QUOTES_COLLECTION_NAME);
         quotes.ensureIndex("{movie_name: 'text', 'quotes.quote': 'text', 'quotes.character': 'text'}");
     }
+
+    /**
+     *  db.quotes.find({$text: {$search: '2013 Agatha Harvey Spencer breakup blog crackhead'}},
+       {movie_name: 1, score: {$meta: 'textScore'}}).sort({score: {$meta: 'textScore'}});
+     */
 
     @Test
     public void french_stop_word_text_search() {
@@ -69,7 +74,7 @@ public class TestTextSearch {
         long smallCaseDocumentCount = quotes.count("{$text: {$search: '\"pulp fiction\"'}}");
 
         //THEN
-        assertThat(smallCaseDocumentCount).isEqualTo(13);
+        assertThat(smallCaseDocumentCount).isEqualTo(14);
 
         //AND WHEN
         long mixedCaseDocumentCount = quotes.count("{$text: {$search: '\"puLp fIcTiOn\"'}}");
@@ -86,6 +91,6 @@ public class TestTextSearch {
         long count = quotes.count("{$text: {$search: 'pulp fiction'}}");
 
         //THEN
-        assertThat(count).isEqualTo(410);
+        assertThat(count).isEqualTo(411);
     }
 }

@@ -65,7 +65,7 @@ public class TestGeoSpatial {
         //WHEN
         List<ZipData> results = Lists.newArrayList(zipCodes.find("{loc: {$near : {$geometry : {type: 'Point', " +
                 "coordinates: [-122.252696, 37.900933] }, $maxDistance: # }}}", lowerLimit)
-                .as(ZipData.class));
+                .as(ZipData.class).iterator());
 
         //THEN
         assertThat(results).hasSize(19);
@@ -87,7 +87,7 @@ public class TestGeoSpatial {
         //WHEN
         List<ZipData> results = Lists.newArrayList(zipCodes.find("{loc: {$near : {$geometry : {type: 'Point', " +
                 "coordinates: [-122.252696, 37.900933] }, $maxDistance: # }}, pop : {$gt: #}}", lowerLimit, population)
-                .as(ZipData.class));
+                .as(ZipData.class).iterator());
 
         //THEN
         assertThat(results).hasSize(8);

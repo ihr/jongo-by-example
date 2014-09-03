@@ -56,7 +56,7 @@ public class TestFindWithRegex {
 
         //WHEN
         List<Sword> swordsOfSteel = Lists.newArrayList(weapons
-                .find("{" + Sword.MATERIAL + ": {$regex: #}}", "steel.*").as(Sword.class));
+                .find("{" + Sword.MATERIAL + ": {$regex: #}}", "steel.*").as(Sword.class).iterator());
 
         //THEN
         assertThat(swordsOfSteel).isNotEmpty();
@@ -75,7 +75,7 @@ public class TestFindWithRegex {
 
         //WHEN
         List<Sword> swordsOfSteel = Lists.newArrayList(weapons
-                .find("{" + Sword.MATERIAL + ": #}", Pattern.compile("steel.*")).as(Sword.class));
+                .find("{" + Sword.MATERIAL + ": #}", Pattern.compile("steel.*")).as(Sword.class).iterator());
 
         //THEN
         assertThat(swordsOfSteel).isNotEmpty();
